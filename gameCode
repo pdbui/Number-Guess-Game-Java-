@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class Game1
+{
+    public static Scanner scan = new Scanner(System.in);
+    static process game = new process();
+    static String userInput;
+    static int userIntInput;
+    static String message;
+    static String repeat;
+    static boolean quitGame;
+
+    public static void main(String[] args)
+    {
+        while (!quitGame)
+        {
+            System.out.println("\nI'm thinking of a number between 1 and 5");
+            System.out.print("Your guess: ");
+            userInput = scan.nextLine();
+            userIntInput = Integer.parseInt(userInput);
+
+            game.setGuess(userIntInput);
+            message = game.getGuess();
+            System.out.println(message);
+            System.out.println("Do you want to play again?");
+            System.out.print("Y/N: ");
+            repeat = scan.nextLine();
+            if (repeat.equals("y"))
+            {
+                quitGame = false;
+            }
+            if (repeat.equals("n"))
+            {
+                quitGame = true;
+            }
+        }
+        System.out.println("\nGoodbye!");
+
+
+    }
+}
+
+class process
+{
+    public static Random rand = new Random();
+    private int userGuess;
+    private int randomNumber = rand.nextInt(5) + 1;
+    private String response;
+
+    void setGuess(int guess)
+    {
+        userGuess = guess;
+    }
+
+    String getGuess()
+    {
+        if (userGuess == randomNumber)
+        {
+            response = "\nYou guessed right!\n";
+        }
+        else
+        {
+            response = "\nYou guess wrong! My guess was " + randomNumber + "!\n";
+        }
+        return response;
+    }   
+
+}
